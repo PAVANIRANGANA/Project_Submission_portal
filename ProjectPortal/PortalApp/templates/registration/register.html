@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block title %}Student Registration{% endblock %}
+
+{% block content %}
+<style>
+    .register-container {
+        margin-top: 100px;
+        background-color: white;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        width: 350px;
+        margin-left: auto;
+        margin-right: auto;
+        font-family: Arial, sans-serif;
+    }
+    h2 {
+        text-align: center;
+        color: #333;
+    }
+    button {
+        padding: 10px 20px;
+        background-color: #28a745;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        width: 100%;
+        margin-top: 10px;
+    }
+    a {
+        color: #007bff;
+        text-decoration: none;
+    }
+    p {
+        text-align: center;
+        margin-top: 15px;
+    }
+</style>
+
+<div class="register-container">
+    <h2>Student Registration</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Register</button>
+    </form>
+    <p>Already have an account? <a href="{% url 'combined_login' %}">Login here</a></p>
+</div>
+{% endblock %}

@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+
+{% block title %}Submit Project{% endblock %}
+
+{% block content %}
+<style>
+    .container {
+        background-color: #fff;
+        border: 2px solid #ccc;
+        padding: 30px;
+        width: 500px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        margin: 50px auto;
+    }
+    h2 {
+        text-align: center;
+    }
+    form {
+        margin-top: 20px;
+    }
+    button {
+        padding: 10px 20px;
+        background-color: #007bff;
+        border: none;
+        color: white;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+    p small {
+        font-size: 12px;
+        color: #666;
+    }
+    .message-success {
+        color: green;
+        font-weight: bold;
+    }
+    .message-error {
+        color: red;
+        font-weight: bold;
+    }
+    .back-link {
+        text-align: center;
+        margin-top: 20px;
+    }
+    .back-link a {
+        color: #007bff;
+        text-decoration: none;
+    }
+</style>
+
+<div class="container">
+    <h2>Submit Your Project</h2>
+
+    {% if error %}
+        <p class="message-error">{{ error }}</p>
+    {% endif %}
+
+    {% if messages %}
+        {% for message in messages %}
+            <p class="message-success">{{ message }}</p>
+        {% endfor %}
+    {% endif %}
+
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <p><small>Allowed formats: .pdf, .ppt, .pptx</small></p>
+        <button type="submit">Submit Project</button>
+    </form>
+
+    <div class="back-link">
+        <a href="{% url 'dashboard' %}">Back to Dashboard</a>
+    </div>
+</div>
+{% endblock %}

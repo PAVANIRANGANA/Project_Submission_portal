@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+
+{% block title %}Review Project{% endblock %}
+
+{% block content %}
+<style>
+    .container {
+        width: 60%;
+        margin: 50px auto;
+        background: #fff;
+        padding: 25px;
+        border-radius: 10px;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+        font-family: Arial, sans-serif;
+    }
+    h2 {
+        color: #333;
+        margin-bottom: 15px;
+    }
+    p {
+        margin: 8px 0;
+    }
+    a {
+        color: #007bff;
+        text-decoration: none;
+    }
+    a:hover {
+        text-decoration: underline;
+    }
+    form {
+        margin-top: 20px;
+    }
+    button {
+        padding: 10px 20px;
+        background-color: #28a745;
+        border: none;
+        color: #fff;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+    .back-link {
+        display: block;
+        margin-top: 20px;
+    }
+</style>
+
+<div class="container">
+    <h2>Review Project</h2>
+
+    <p><strong>Project Name:</strong> {{ project.title }}</p>
+    <p><strong>Submitted by:</strong> {{ project.student.username }}</p>
+    <p><strong>Abstract:</strong> {{ project.abstract }}</p>
+    <p><strong>Technology Used:</strong> {{ project.technology_used }}</p>
+    <p><a href="{{ project.file.url }}" target="_blank">📄Download File</a></p>
+
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Submit Review</button>
+    </form>
+
+    <a class="back-link" href="{% url 'admin_view' %}">Back to Admin View</a>
+</div>
+{% endblock %}

@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+
+{% block title %}Admin View{% endblock %}
+
+{% block content %}
+<style>
+    .container {
+        width: 80%;
+        margin: 50px auto;
+    }
+    .project-box {
+        background-color: #fff;
+        padding: 15px;
+        border-left: 5px solid #007bff;
+        margin-bottom: 15px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    .project-box p {
+        margin: 5px 0;
+    }
+    a {
+        color: #007bff;
+        text-decoration: none;
+    }
+    a:hover {
+        text-decoration: underline;
+    }
+    .logout {
+        margin-top: 20px;
+        text-align: right;
+    }
+    
+</style>
+
+<div class="container">
+    <h2>All Submitted Projects</h2>
+
+    {% for project in projects %}
+        <div class="project-box">
+            <p><strong>Project Name:</strong> {{ project.title }}</p>
+            <p><strong>Student:</strong> {{ project.student.username }}</p>
+            <p><strong>Technology:</strong> {{ project.technology_used }}</p>
+            <p><strong>Status:</strong> {{ project.status }}</p>
+            <p>
+                <a href="{{ project.file.url }}" target="_blank">📄Download File</a>
+                <a href="{% url 'review_project' project.id %}">   📝Review</a>
+            </p>
+        </div>
+    {% empty %}
+        <p>No projects submitted.</p>
+    {% endfor %}
+
+    <div class="logout">
+        <form method="post" action="{% url 'logout' %}" style="display: inline;">
+            {% csrf_token %}
+            <button type="submit" style="background: none; border: none; color: #007bff; cursor: pointer; font-size: 1em; padding: 0;">
+                Logout
+            </button>
+        </form>
+    </div>
+
+</div>
+{% endblock %}
+

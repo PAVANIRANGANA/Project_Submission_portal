@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{% block title %}Home | Project Submission Portal{% endblock %}
+
+{% block content %}
+<style>
+    .home-container {
+        max-width: 800px;
+        margin: 80px auto 40px auto;
+        background-color: #fff;
+        padding: 40px;
+        border-radius: 10px;
+        text-align: center;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        font-family: Arial, sans-serif;
+    }
+
+    h1 {
+        color: #007bff;
+        margin-bottom: 20px;
+        font-size: 32px;
+    }
+
+    p {
+        font-size: 18px;
+        color: #444;
+        margin-bottom: 15px;
+    }
+
+    .cta-button {
+        margin-top: 25px;
+        padding: 12px 24px;
+        font-size: 16px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        text-decoration: none;
+        display: inline-block;
+        transition: background-color 0.3s ease;
+    }
+
+    .cta-button:hover {
+        background-color: #0056b3;
+    }
+
+</style>
+
+<div class="home-container">
+    <h1>Welcome to the Project Submission Portal</h1>
+    <p>Use this portal to register, submit your projects, and for admins to review them.</p>
+    <p>To get started, click the button below.</p>
+    <a href="{% url 'combined_login' %}" class="cta-button">Get Started</a>
+</div>
+
+{% endblock %}
+

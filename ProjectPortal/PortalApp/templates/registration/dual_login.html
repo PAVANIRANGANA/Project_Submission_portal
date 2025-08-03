@@ -1,0 +1,95 @@
+{% extends "base.html" %}
+{% block title %}Login Page{% endblock %}
+{% block content %}
+<style>
+    .login-container {
+        display: flex;
+        justify-content: center;
+        gap: 40px;
+        margin-top: 80px;
+        flex-wrap: wrap;
+    }
+    .login-card {
+        background-color: white;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        width: 320px;
+        font-family: Arial, sans-serif;
+    }
+    h2 {
+        text-align: center;
+        color: #007bff;
+    }
+    form button {
+        padding: 10px 20px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        width: 100%;
+        margin-top: 10px;
+        cursor: pointer;
+    }
+    .login-card a {
+        text-decoration: none;
+        color: #007bff;
+        font-weight: bold;
+    }
+    .login-card a:hover {
+        text-decoration: underline;
+    }
+    .back-home-wrapper {
+        text-align: center;
+        margin-top: 30px;
+    }
+
+    .back-home-button {
+        padding: 10px 25px;
+        background-color: #007bff;
+        color: white;
+        text-decoration: none;
+        font-weight: bold;
+        border-radius: 6px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        transition: background-color 0.3s ease;
+    }
+
+    .back-home-button:hover {
+        background-color: #0056b3;
+    }
+
+
+</style>
+
+<div class="login-container">
+
+    <!-- Student Login Card -->
+    <div class="login-card">
+        <h2>Student Login</h2>
+        <form method="post" action="{% url 'combined_login' %}">
+            {% csrf_token %}
+            {{ student_form.as_p }}
+            <button type="submit" name="student_login" value="1">Login</button>
+        </form>
+        <p>Don't have an account? <a href="{% url 'student_register' %}">Register here</a></p>
+    </div>
+
+    <!-- Admin Login Card -->
+    <div class="login-card">
+        <h2>Admin Login</h2>
+        <form method="post" action="{% url 'combined_login' %}">
+            {% csrf_token %}
+            {{ admin_form.as_p }}
+            <button type="submit" name="admin_login" value="1">Login</button>
+        </form>
+        <p>Only authorized users are allowed.</p>
+    </div>
+
+</div>
+
+<div class="back-home-wrapper">
+    <a href="{% url 'home' %}" class="back-home-button">Back to Home</a>
+</div>
+
+{% endblock %}
